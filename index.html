@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-12 col-lg-3">
                 <!-- form to input city -->
                 <form class="border border-secondary m-2 d-flex flex-column" id="form">
                     <h2 class="m-2 text-center">Enter City</h2>
@@ -23,13 +23,14 @@
                     <button class="btn btn-secondary m-2" type="submit">Submit</button>
                 </form>
                 <!-- list of previous dates -->
+                <h5 class="text-center">Search History</h5>
                 <div class="row" id="search-history"></div>
             </div>
 
-            <div class="col-9 border border-primary">
+            <div class=" col-12 col-lg-9 border border-primary">
                 <!-- div to display the weather data -->
                 <div class="row">
-                    <div id="current-weather" class="col-12">Enter a city to see it's current weather report</div>
+                    <h2 id="current-weather" class="col-12">Enter a city to see it's current weather report</h2>
                     <div id="date"></div>
                     <div id="temp"></div>
                     <div id="humidity"></div>
@@ -37,7 +38,7 @@
                     <div id="uv"></div>
                     <div id="icon"></div>
 
-                    <div id="forecast" class="row"></div>
+                    <div id="forecast" class="d-flex"></div>
                 </div>
                  
             </div>

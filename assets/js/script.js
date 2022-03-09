@@ -17,7 +17,7 @@ var loadHistory = function(){
         //generate the search history list
         $("<button>")
             .text(item)
-            .addClass("col-12 my-2")
+            .addClass("col-10 my-2 py-1 mx-auto")
             .appendTo($("#search-history"))
     })
 }
@@ -51,7 +51,7 @@ var displayCurrentWeather = function(current){
     var icon = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"
 
     $("#current-weather").text("Today's Forecast");
-    $("#date").text( "date is: ");
+    $("#date").text(moment().format("dddd, MMMM Do YYYY"));
     $("#temp").text("current temp is: " + current.temp + "°F"); 
     $("#humidity").text("humidity today is: " + current.humidity + "%");
     $("#wind").text("wind speeds today are: " + current.wind_speed + "mph");
@@ -84,7 +84,7 @@ var displayForecast = function(daily){
 
         //create each div to display the forecast, then append to the card
         $("<div>")
-            .text("Day " + (index + 1))
+            .text(moment().add((index + 1), 'd').format("dddd, MMMM Do YYYY"))
             .addClass("")
             .appendTo("#day-" + index);
 
@@ -170,6 +170,9 @@ $("#form").on("submit", function(event){
 
     //get the geodata from the city
     getLocation(city);
+
+    // delete the text from the input box
+    $("#city").val("");
 })
 
 //then a search history button is clicked
