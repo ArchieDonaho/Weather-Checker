@@ -25,6 +25,11 @@ city
     -wind speed
     -UV index
         -color to show favorable, moderate, or severe
+        -1,2: low, greed
+        -3,4,5: moderate, yellow
+        -6,7: high, orange
+        -8,9,10: very high, red
+        -11+: extreme, purple
 
 -future weather conditions-
     -5 day forecast-
