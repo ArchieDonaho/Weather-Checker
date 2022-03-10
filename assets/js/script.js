@@ -1,6 +1,22 @@
 //create the search history array
 var searchHistory = [];
 
+//use the timezone to generate a date at that location
+var timeZone = function(timezone){
+    //obtain the user's timezone
+    var myTimeZone = moment.tz.guess();
+
+    //obtain the data for the user's current date/time
+    var myTime = moment.tz((moment().format()), myTimeZone);
+
+    //obtain the target location's time
+    var theirTime = myTime.clone().tz(timezone);
+
+    //return the date/time
+    return theirTime;
+}
+
+
 var loadHistory = function(){
     searchHistory =  JSON.parse(localStorage.getItem("history"));
 
@@ -45,13 +61,14 @@ var saveHistory = function(city){
     loadHistory();
 }
 
-var displayCurrentWeather = function(current){
+var displayCurrentWeather = function(current, timezone){
     console.log(current);
+    var theirTime = timeZone(timezone);
 
     var icon = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"
 
     $("#current-weather").text("Today's Forecast");
-    $("#date").text(moment().format("dddd, MMMM Do YYYY"));
+    $("#date").text(theirTime.format("dddd, MMMM Do YYYY, h:mm a"));
     $("#temp").text("current temp is: " + current.temp + "°F"); 
     $("#humidity").text("humidity today is: " + current.humidity + "%");
     $("#wind").text("wind speeds today are: " + current.wind_speed + "mph");
@@ -67,8 +84,9 @@ var displayCurrentWeather = function(current){
     
 }
 
-var displayForecast = function(daily){
-    console.log(daily);
+var displayForecast = function(daily, timezone){
+    //get the date of the selected location
+    var theirTime = timeZone(timezone);
 
     //remove any old content in teh forecast section
     $("#forecast").text("");
@@ -79,12 +97,12 @@ var displayForecast = function(daily){
         //create card
         $("<div>")
             .attr("id", "day-" + index)
-            .addClass("card col-2")
+            .addClass("card")
             .appendTo($("#forecast"));
 
         //create each div to display the forecast, then append to the card
         $("<div>")
-            .text(moment().add((index + 1), 'd').format("dddd, MMMM Do YYYY"))
+            .text(theirTime.add(1, 'd').format("dddd, MMMM Do YYYY"))
             .addClass("")
             .appendTo("#day-" + index);
 
@@ -117,9 +135,10 @@ var getWeather = function(lat, lon){
         if(response.ok){
             response.json().then(function(data){
                 console.log(data);
+                console.log(data.timezone);
 
-                displayCurrentWeather(data.current);
-                displayForecast(data.daily);
+                displayCurrentWeather(data.current, data.timezone);
+                displayForecast(data.daily, data.timezone);
            })
         } else {
             alert("Something Went Wrong, Please Try Again")
@@ -139,8 +158,6 @@ var getLocation = function(city){
                 if(data[0] == undefined){
                     alert("Please Enter a Valid Vity")
                 } else {
-                    console.log(data[0].lat, data[0].lon);
-
                     //send the geodata to obtain the weather data
                     getWeather(data[0].lat, data[0].lon);
 
@@ -183,3 +200,5 @@ $("#search-history").on("click", "button", function(event){
     //display the weather information once the button is clicked
     getLocation(city);
 })
+
+
