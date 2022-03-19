@@ -1,3 +1,8 @@
+html {
+    width: 90%;
+    margin: auto;
+}
+
 body {
     font-family: 'Quicksand', sans-serif;
 }
@@ -22,3 +27,12 @@ body {
     color: purple;
 }
 
+.card-style {
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 922px){
+    html {
+        width: 100%;
+    }
+}

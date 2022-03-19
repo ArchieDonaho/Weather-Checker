@@ -23,30 +23,29 @@
                 <form class="m-2 d-flex flex-column shadow " id="form">
                     <h2 class="m-2 text-center">Enter a city to see it's current weather report</h2>
                     <input id="city" class="form-control my-2" type="text">
-                    <button class="btn btn-secondary m-2 shadow" type="submit">Submit</button>
+                    <button class="btn btn-secondary m-2" type="submit">Submit</button>
                 </form>
                 <!-- list of previous dates -->
                 <h5 class="text-center">Search History</h5>
                 <div class="row" id="search-history"></div>
             </div>
 
-            <div class=" col-12 col-lg-9 shadow ">
+            <div class=" col-12 col-lg-9 shadow mb-5">
                 <!-- div to display the weather data -->
                 <div class="row">
                     <div class="col-6">
                         <h1 id="current-weather" class="p-3"></h1>
                         <h4 id="date"></h4>
                         <h1 id="temp"></h1>
-                        <div id="humidity"></div>
-                        <div id="wind"></div>
-                        <div id="uv"></div>
+                        <h5 id="humidity"></h5>
+                        <h5 id="wind"></h5>
+                        <h5 id="uv"></h5>
                     </div>
                     <div class="col-6 d-flex justify-content-center">
                         <img id="icon"></img>
                     </div>
-
-                    <div id="forecast" class="d-flex flex-column flex-lg-row card-group mt-5"></div>
                 </div>
+                <div id="forecast" class="d-flex flex-column flex-lg-row card-group mt-5"></div>
                  
             </div>
         </div>

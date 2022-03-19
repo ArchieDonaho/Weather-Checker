@@ -35,7 +35,7 @@ var loadHistory = function(){
         //generate the search history list
         $("<button>")
             .text(item)
-            .addClass("col-5 col-lg-10 my-2 py-1 mx-auto btn-secondary shadow")
+            .addClass("col-5 col-lg-10 my-2 py-1 mx-auto btn btn-secondary shadow")
             .appendTo($("#search-history"))
     })
 }
@@ -74,7 +74,7 @@ var displayCurrentWeather = function(current, timezone, city){
     var icon = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"
 
     //generate the weather data
-    $("#current-weather").text(city + "'s Forecast")
+    $("#current-weather").text(city + "'s Weather")
         .removeClass("p-3")
         .addClass("col-6");
     $("#date").text(theirTime.format("dddd, MMMM Do YYYY, h:mm a"))
@@ -120,17 +120,19 @@ var displayForecast = function(daily, timezone){
 
     //loop through the array and generate the forecast
     $.each(daily, function(index, item){
+        //only create 5 cards
         if(index === 5){return false};
+
         //create card
         $("<div>")
             .attr("id", "day-" + index)
-            .addClass("card d-flex flex-row flex-lg-column border-dark bg-primary bg-opacity-10")
+            .addClass("card card-style d-flex flex-row flex-lg-column border-dark")
             .appendTo($("#forecast"));
-
+            
         //create card header
-        $("<h6>")
+        $("<div>")
             .text(theirTime.add(1, 'd').format("dddd, MMMM Do, YYYY"))
-            .addClass("card-header text-center")
+            .addClass("card-header text-center align-middle ")
             .appendTo("#day-" + index);
 
         //create card body
@@ -139,7 +141,7 @@ var displayForecast = function(daily, timezone){
             .addClass("card-body col-5 col-lg-12")
             .appendTo("#day-" + index);
 
-        //create card body to hold the image
+        //create card body to hold the condition image
         $("<div>")
             .attr("id", "card-image-" + index)
             .addClass("card-body col-5 col-lg-12")
@@ -161,6 +163,7 @@ var displayForecast = function(daily, timezone){
             .addClass("card-text my-2")
             .appendTo("#card-body-" + index);
 
+            //create condition image and append to the card image body
         $("<img>")
             .addClass("img-fluid")
             .attr("src", "http://openweathermap.org/img/wn/" + daily[index].weather[0].icon + "@2x.png")
